@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liên Hệ - Cầu Đông Nam Bộ</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Liên Hệ & Đánh Giá</h1>
+</header>
+
+<nav>
+    <a href="index.html">Trang chủ</a>
+    <a href="about.html">Giới thiệu</a>
+    <a href="list.html">Danh sách cầu</a>
+    <a href="compare.html">So sánh</a>
+    <a href="timeline.html">Lịch sử</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="map.html">Bản đồ</a>
+    <a href="education.html">Giáo dục</a>
+    <a href="contact.html">Liên hệ</a>
+</nav>
+<div class="toggle-theme" onclick="toggleTheme()">🌙 / ☀️</div>
+<audio id="bgMusic" loop>
+  <source src="sounds/cau.mp3" type="audio/mpeg">
+</audio>
+
+<div class="music-toggle" onclick="toggleMusic()">🎵</div>
+
+
+<section class="contact-container">
+
+    <!-- THÔNG TIN NHÓM -->
+    <div class="contact-box">
+        <h2>Thông Tin Nhóm</h2>
+        <p><strong>Tên nhóm:</strong> Nhóm 11 </p>
+        <p><strong>Lớp:</strong> 12D1</p>
+        <p><strong>Email:</strong> nhom11lop12d1@gmail.com</p>
+        <p><strong>SĐT:</strong> 0123 456 ***</p>
+    </div>
+
+    <!-- FORM LIÊN HỆ -->
+    <div class="contact-box">
+        <h2>Gửi Liên Hệ</h2>
+
+        <form action="https://formsubmit.co/caudongnambo@gmail.com" method="POST">
+            
+            <input type="hidden" name="_captcha" value="false">
+
+            <input type="text" name="name" placeholder="Họ và tên" required>
+
+            <input type="email" name="email" placeholder="Email" required>
+
+            <textarea name="message" rows="4" placeholder="Nội dung liên hệ..." required></textarea>
+
+            <button type="submit">Gửi</button>
+
+        </form>
+
+    </div>
+
+    <!-- ĐÁNH GIÁ -->
+    <div class="contact-box">
+        <h2>Đánh Giá Website</h2>
+
+        <div class="rating" id="rating">
+            <span data-star="1">★</span>
+            <span data-star="2">★</span>
+            <span data-star="3">★</span>
+            <span data-star="4">★</span>
+            <span data-star="5">★</span>
+        </div>
+
+        <textarea id="commentInput" rows="3" placeholder="Viết bình luận của bạn..."></textarea>
+        <button onclick="addComment()">Gửi Đánh Giá</button>
+
+        <div id="commentList"></div>
+    </div>
+
+</section>
+
+<footer>
+    © 2026 Nhóm 11 lớp 12D1
+</footer>
+
+<script>
+let selectedRating = 0;
+
+// Xử lý chọn sao
+document.querySelectorAll("#rating span").forEach(star => {
+    star.addEventListener("click", function() {
+        selectedRating = this.getAttribute("data-star");
+        updateStars();
+    });
+});
+
+function updateStars() {
+    document.querySelectorAll("#rating span").forEach(star => {
+        if (star.getAttribute("data-star") <= selectedRating) {
+            star.style.color = "#ffc107";
+        } else {
+            star.style.color = "#ccc";
+        }
+    });
+}
+
+// Thêm bình luận
+function addComment() {
+    const commentText = document.getElementById("commentInput").value;
+
+    if(commentText === "" || selectedRating === 0){
+        alert("Vui lòng chọn số sao và nhập bình luận!");
+        return;
+    }
+
+    const commentBox = document.createElement("div");
+    commentBox.classList.add("comment-item");
+    commentBox.innerHTML = `
+        <p><strong>Đánh giá:</strong> ${"★".repeat(selectedRating)}</p>
+        <p>${commentText}</p>
+        <hr>
+    `;
+
+    document.getElementById("commentList").prepend(commentBox);
+
+    document.getElementById("commentInput").value = "";
+    selectedRating = 0;
+    updateStars();
+}
+</script>
+   <script>
+function toggleTheme() {
+  document.body.classList.toggle("dark");
+
+  const btn = document.querySelector(".toggle-theme");
+
+  if (document.body.classList.contains("dark")) {
+    btn.textContent = "☀️";
+    localStorage.setItem("theme", "dark");
+  } else {
+    btn.textContent = "🌙";
+    localStorage.setItem("theme", "light");
+  }
+}
+
+window.onload = function () {
+  const btn = document.querySelector(".toggle-theme");
+
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark");
+    btn.textContent = "☀️";
+  } else {
+    btn.textContent = "🌙";
+  }
+};
+</script>
+
+<script>
+const bgMusic = document.getElementById("bgMusic");
+const musicBtn = document.querySelector(".music-toggle");
+
+let musicOn = localStorage.getItem("music") !== "off";
+
+window.addEventListener("load", () => {
+  if (musicOn) {
+    bgMusic.volume = 0.4;
+    bgMusic.play().catch(()=>{});
+  } else {
+    musicBtn.classList.add("off");
+    musicBtn.textContent = "🔇";
+  }
+});
+
+function toggleMusic() {
+  musicOn = !musicOn;
+  if (musicOn) {
+    bgMusic.play();
+    musicBtn.textContent = "🎵";
+    musicBtn.classList.remove("off");
+    localStorage.setItem("music", "on");
+  } else {
+    bgMusic.pause();
+    musicBtn.textContent = "🔇";
+    musicBtn.classList.add("off");
+    localStorage.setItem("music", "off");
+  }
+}
+</script>
+
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  ↑
+</button>
+
+</body>
+</html>

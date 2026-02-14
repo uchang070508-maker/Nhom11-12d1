@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>So sánh nâng cao các cầu Đông Nam Bộ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<header>
+    <h1>SO SÁNH CÁC CÂY CẦU ĐÔNG NAM BỘ</h1>
+    <p>Phân tích tổng hợp các công trình giao thông tiêu biểu</p>
+</header>
+
+<nav>
+    <a href="index.html">Trang chủ</a>
+    <a href="about.html">Giới thiệu</a>
+    <a href="list.html">Danh sách cầu</a>
+    <a href="compare.html">So sánh</a>
+    <a href="timeline.html">Lịch sử</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="map.html">Bản đồ</a>
+    <a href="education.html">Giáo dục</a>
+    <a href="contact.html">Liên hệ</a>
+</nav>
+<div class="toggle-theme" onclick="toggleTheme()">🌙 / ☀️</div>
+<audio id="bgMusic" loop>
+  <source src="sounds/cau.mp3" type="audio/mpeg">
+</audio>
+
+<div class="music-toggle" onclick="toggleMusic()">🎵</div>
+
+<body>
+
+<div class="compare-advanced">
+
+    <h1>So sánh kỹ thuật các cây cầu Đông Nam Bộ</h1>
+
+    <!-- BẢNG SO SÁNH KỸ THUẬT -->
+    <table class="compare-table">
+        <tr>
+            <th>Tên cầu</th>
+            <th>Chiều dài (m)</th>
+            <th>Năm hoàn thành</th>
+            <th>Tổng mức đầu tư (tỷ đồng)</th>
+            <th>Loại cầu</th>
+        </tr>
+
+        <tr class="highlight">
+            <td>Cầu Thủ Thiêm</td>
+            <td>1250</td>
+            <td>2008</td>
+            <td>1099,6</td>
+            <td>Bê tông cốt thép</td>
+        </tr>
+
+      <tr>
+            <td>Cầu Sài Gòn</td>
+            <td>1.010</td>
+            <td>1961</td>
+        <td>không rõ</td>
+            <td>Bê tông cốt thép</td>
+        </tr>
+
+      <tr>
+            <td>Cầu Đồng Nai</td>
+          
+            <td>461</td>
+            <td>2009</td>
+        <td>1500</td>
+            <td>Bê tông cốt thép</td>
+        </tr>
+
+      <tr>
+            <td>Cầu Bình Triệu</td>
+            <td>554/560</td>
+            <td>.... / 2003</td>
+        <td>800</td>
+            <td>Dầm thép + BTCT</td>
+        </tr>
+        <tr>
+            <td>Cầu Phú Cường</td>
+            <td>446</td>
+            <td>2007</td>
+            <td>1000</td>
+            <td>Dây văng</td>
+        </tr>
+
+        <tr>
+            <td>Cầu Cửa Lấp</td>
+            <td>721,95</td>
+            <td>2004</td>
+            <td>80</td>
+            <td>Bê tông cốt thép</td>
+        </tr>
+
+        <tr>
+            <td>Cầu Cỏ May</td>
+            <td>258</td>
+            <td>2000</td>
+            <td>500</td>
+            <td>Bê tông cốt thép</td>
+        </tr>
+
+        <tr>
+            <td>Cầu An Hảo</td>
+            <td>200</td>
+            <td>2014</td>
+            <td>100</td>
+            <td>Bê tông cốt thép</td>
+        </tr>
+    </table>
+
+    <!-- PHÂN TÍCH -->
+    <div class="analysis-section">
+        <h2>Phân tích nổi bật</h2>
+        <p><strong>Cầu dài nhất:</strong> Cầu Thủ Thiêm (1250m)</p>
+        <p><strong>Cầu mới nhất:</strong> Cầu An Hảo (2014)</p>
+        <p><strong>Cầu đầu tư lớn nhất:</strong> Cầu Đồng Nai</p>
+    </div>
+
+    <!-- BIỂU ĐỒ -->
+    <div class="chart-section">
+        <h2>So sánh chiều dài</h2>
+        <canvas id="lengthChart"></canvas>
+    </div>
+
+    <div class="chart-section">
+        <h2>So sánh năm hoàn thành</h2>
+        <canvas id="yearChart"></canvas>
+    </div>
+
+    <div class="chart-section">
+        <h2>So sánh tổng mức đầu tư</h2>
+        <canvas id="costChart"></canvas>
+    </div>
+
+</div>
+
+<script>
+const bridges = ["Sài Gòn","Thủ Thiêm","Đồng Nai", "An Hảo","Bình Triệu1","Bình Triệu2","Phú Cường", "Cửa Lấp", "Cỏ May"];
+const lengthData = [986.12,1250,461,200,554,560, 446, 721.95, 258];
+const yearData   = [1961,2008,2009,2014,00,2003,2007,2004,2000];
+const costData   = [0000,1099.6,1500,100,133,341,1000,80,500];
+
+new Chart(document.getElementById("lengthChart"), {
+    type: "bar",
+    data: {
+        labels: bridges,
+        datasets: [{
+            label: "Chiều dài (m)",
+            data: lengthData
+        }]
+    }
+});
+
+new Chart(document.getElementById("yearChart"), {
+    type: "bar",
+    data: {
+        labels: bridges,
+        datasets: [{
+            label: "Năm hoàn thành",
+            data: yearData
+        }]
+    }
+});
+
+new Chart(document.getElementById("costChart"), {
+    type: "bar",
+    data: {
+        labels: bridges,
+        datasets: [{
+            label: "Tổng đầu tư (tỷ đồng)",
+            data: costData
+        }]
+    }
+});
+</script>
+    <script>
+function toggleTheme() {
+  document.body.classList.toggle("dark");
+
+  const btn = document.querySelector(".toggle-theme");
+
+  if (document.body.classList.contains("dark")) {
+    btn.textContent = "☀️";
+    localStorage.setItem("theme", "dark");
+  } else {
+    btn.textContent = "🌙";
+    localStorage.setItem("theme", "light");
+  }
+}
+
+window.onload = function () {
+  const btn = document.querySelector(".toggle-theme");
+
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark");
+    btn.textContent = "☀️";
+  } else {
+    btn.textContent = "🌙";
+  }
+};
+</script>
+
+<script>
+const bgMusic = document.getElementById("bgMusic");
+const musicBtn = document.querySelector(".music-toggle");
+
+let musicOn = localStorage.getItem("music") !== "off";
+
+window.addEventListener("load", () => {
+  if (musicOn) {
+    bgMusic.volume = 0.4;
+    bgMusic.play().catch(()=>{});
+  } else {
+    musicBtn.classList.add("off");
+    musicBtn.textContent = "🔇";
+  }
+});
+
+function toggleMusic() {
+  musicOn = !musicOn;
+  if (musicOn) {
+    bgMusic.play();
+    musicBtn.textContent = "🎵";
+    musicBtn.classList.remove("off");
+    localStorage.setItem("music", "on");
+  } else {
+    bgMusic.pause();
+    musicBtn.textContent = "🔇";
+    musicBtn.classList.add("off");
+    localStorage.setItem("music", "off");
+  }
+}
+</script>
+
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  ↑
+</button>
+
+</body>
+</html>

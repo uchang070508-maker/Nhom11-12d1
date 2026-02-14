@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dòng thời gian 8 cây cầu Đông Nam Bộ</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<header>
+<h1>Dòng Thời Gian Phát Triển 8 Cây Cầu Đông Nam Bộ</h1>
+</header>
+<nav>
+    <a href="index.html">Trang chủ</a>
+    <a href="about.html">Giới thiệu</a>
+    <a href="list.html">Danh sách cầu</a>
+    <a href="compare.html">So sánh</a>
+    <a href="timeline.html">Lịch sử</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="map.html">Bản đồ</a>
+    <a href="education.html">Giáo dục</a>
+    <a href="contact.html">Liên hệ</a>
+</nav>
+<div class="toggle-theme" onclick="toggleTheme()">🌙 / ☀️</div>
+<audio id="bgMusic" loop>
+  <source src="sounds/cau.mp3" type="audio/mpeg">
+</audio>
+
+<div class="music-toggle" onclick="toggleMusic()">🎵</div>
+
+<section class="timeline-section">
+
+<div class="timeline">
+
+    <div class="timeline-item">
+        <div class="timeline-year">1961</div>
+        <div class="timeline-content">
+            <h3>Cầu Sài Gòn</h3>
+            <p>Kết nối trung tâm TP.HCM với khu Đông qua sông Sài Gòn.</p>
+            <p><strong>Ảnh hưởng:</strong> Thúc đẩy đô thị hóa Thủ Đức – Biên Hòa, mở rộng kinh tế vùng.</p>
+        </div>
+    </div>
+
+    <div class="timeline-item">
+        <div class="timeline-year">1999 – 2000</div>
+        <div class="timeline-content">
+            <h3>Cầu Cỏ May</h3>
+            <p>Bắc qua sông Dinh (Bà Rịa – Vũng Tàu).</p>
+            <p><strong>Ảnh hưởng:</strong> Tăng kết nối du lịch và vận tải ven biển.</p>
+        </div>
+    </div>
+
+    <div class="timeline-item">
+        <div class="timeline-year">2004</div>
+        <div class="timeline-content">
+            <h3>Cầu Cửa Lấp</h3>
+            <p>Kết nối các tuyến đường ven biển Vũng Tàu.</p>
+            <p><strong>Ảnh hưởng:</strong> Phát triển kinh tế biển và logistics cảng.</p>
+        </div>
+    </div>
+
+    <div class="timeline-item">
+        <div class="timeline-year">2008</div>
+        <div class="timeline-content">
+            <h3>Cầu Thủ Thiêm</h3>
+            <p>Kết nối trung tâm TP.HCM với khu đô thị mới Thủ Thiêm.</p>
+            <p><strong>Ảnh hưởng:</strong> Hình thành trung tâm tài chính mới của thành phố.</p>
+        </div>
+    </div>
+
+    <div class="timeline-item">
+        <div class="timeline-year">2007</div>
+        <div class="timeline-content">
+            <h3>Cầu Phú Cường</h3>
+            <p>Kết nối Bình Dương với TP.HCM.</p>
+            <p><strong>Ảnh hưởng:</strong> Thúc đẩy khu công nghiệp và giao thương liên tỉnh.</p>
+        </div>
+    </div>
+
+    <div class="timeline-item">
+        <div class="timeline-year">2009 – 2010</div>
+        <div class="timeline-content">
+            <h3>Cầu Đồng Nai (mới)</h3>
+            <p>Nâng cấp cầu cũ trên quốc lộ 1A.</p>
+            <p><strong>Ảnh hưởng:</strong> Giảm ùn tắc, tăng lưu thông hàng hóa Bắc – Nam.</p>
+        </div>
+    </div>
+
+    <div class="timeline-item">
+        <div class="timeline-year">2014</div>
+        <div class="timeline-content">
+            <h3>Cầu An Hảo</h3>
+            <p>Bắc qua sông Đồng Nai.</p>
+            <p><strong>Ảnh hưởng:</strong> Tăng kết nối khu dân cư và công nghiệp địa phương.</p>
+        </div>
+    </div>
+
+    <div class="timeline-item">
+        <div class="timeline-year">2018 (mở rộng)</div>
+        <div class="timeline-content">
+            <h3>Cầu Bình Triệu</h3>
+            <p>Mở rộng và nâng cấp hệ thống giao thông cửa ngõ.</p>
+            <p><strong>Ảnh hưởng:</strong> Giảm áp lực giao thông cửa ngõ phía Đông TP.HCM.</p>
+        </div>
+    </div>
+
+</div>
+</section>
+
+<footer>
+© 2026 Nhóm 11 lớp 12D1
+</footer>
+
+<script>
+const items = document.querySelectorAll('.timeline-item');
+
+function reveal(){
+    const trigger = window.innerHeight * 0.85;
+
+    items.forEach(item=>{
+        const top = item.getBoundingClientRect().top;
+        if(top < trigger){
+            item.classList.add('show');
+        }
+    });
+}
+
+window.addEventListener('scroll', reveal);
+reveal();
+    
+</script>
+    <script>
+function toggleTheme() {
+  document.body.classList.toggle("dark");
+
+  const btn = document.querySelector(".toggle-theme");
+
+  if (document.body.classList.contains("dark")) {
+    btn.textContent = "☀️";
+    localStorage.setItem("theme", "dark");
+  } else {
+    btn.textContent = "🌙";
+    localStorage.setItem("theme", "light");
+  }
+}
+
+window.onload = function () {
+  const btn = document.querySelector(".toggle-theme");
+
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark");
+    btn.textContent = "☀️";
+  } else {
+    btn.textContent = "🌙";
+  }
+};
+</script>
+
+<script>
+const bgMusic = document.getElementById("bgMusic");
+const musicBtn = document.querySelector(".music-toggle");
+
+let musicOn = localStorage.getItem("music") !== "off";
+
+window.addEventListener("load", () => {
+  if (musicOn) {
+    bgMusic.volume = 0.4;
+    bgMusic.play().catch(()=>{});
+  } else {
+    musicBtn.classList.add("off");
+    musicBtn.textContent = "🔇";
+  }
+});
+
+function toggleMusic() {
+  musicOn = !musicOn;
+  if (musicOn) {
+    bgMusic.play();
+    musicBtn.textContent = "🎵";
+    musicBtn.classList.remove("off");
+    localStorage.setItem("music", "on");
+  } else {
+    bgMusic.pause();
+    musicBtn.textContent = "🔇";
+    musicBtn.classList.add("off");
+    localStorage.setItem("music", "off");
+  }
+}
+</script>
+
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  ↑
+</button>
+
+</body>
+</html>
